@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Потребител{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+   {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade shadow" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Затвори">
+
+        </button>
+    </div>
+    {% endfor %}
+{#    <h2>Потребителски панел</h2>#}
+    <div class="card">
+      <div class="card-header">
+        {{ current_user.first_name }} {{ current_user.last_name }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Потребителски панел</h5>
+        <p class="card-text">
+            <strong>Име: </strong>{{ current_user.first_name }}<br/>
+            <strong>Фамилия: </strong>{{ current_user.last_name }}<br/>
+            <strong>Потребителско име: </strong>{{ current_user.username }}<br/>
+            <strong>Потребителски номер: </strong>{{ current_user.id }}<br/>
+            <strong>Имейл: </strong>{{ current_user.email }}<br/>
+            <strong>Дата на регистрация: </strong>{{ current_user.joined_at }}<br/>
+        </p>
+        <a href="{{ url_for("logout") }}" class="btn btn-secondary btn-sm">Изход</a>
+      </div>
+    </div>
+
+
+    <br/><br/>
+
+{% endblock %}
+</body>
+</html>
