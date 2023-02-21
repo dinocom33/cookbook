@@ -4,30 +4,30 @@ from wtforms.validators import DataRequired, Email, EqualTo, InputRequired, Leng
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField("Username", validators=[InputRequired(), Length(min=4, max=20)],
+    username = StringField("Потребителско име", validators=[InputRequired(), Length(min=4, max=20)],
                            render_kw={"placeholder": "Username"})
-    email = StringField("Email", validators=[DataRequired(), Email()])
-    first_name = StringField("First Name")
-    last_name = StringField("Last name")
-    password1 = PasswordField("Password", validators=[InputRequired(), Length(min=8, max=20)],
+    email = StringField("Имейл", validators=[DataRequired(), Email()])
+    first_name = StringField("Име")
+    last_name = StringField("Фамилия")
+    password1 = PasswordField("Парола", validators=[InputRequired(), Length(min=8, max=20)],
                               render_kw={"placeholder": "Password"})
-    password2 = PasswordField("Confirm Password", validators=[DataRequired(),
+    password2 = PasswordField("Потвърди парола", validators=[DataRequired(),
                                                               EqualTo("password1", message="Паролите трябва да съвпадат")])
     submit = SubmitField("Регистрация")
 
 
 class LoginForm(FlaskForm):
     # email = StringField("Email", validators=[DataRequired(), Email()])
-    username = StringField("Username", validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-    password = PasswordField("Password", validators=[DataRequired()])
+    username = StringField("Потребителско име", validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
+    password = PasswordField("Парола", validators=[DataRequired()])
     remember = BooleanField("Запомни ме")
     submit = SubmitField("Вход")
 
 
 class UserForm(FlaskForm):
-    username = StringField("Username", validators=[InputRequired(), Length(min=4, max=20)],
+    username = StringField("Потребителскo име", validators=[InputRequired(), Length(min=4, max=20)],
                            render_kw={"placeholder": "Username"})
-    email = StringField("Email", validators=[DataRequired(), Email()])
+    email = StringField("Имейл", validators=[DataRequired(), Email()])
     first_name = StringField("Име")
     last_name = StringField("Фамилия")
     password1 = PasswordField("Password")

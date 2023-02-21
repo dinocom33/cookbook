@@ -7,18 +7,42 @@
 </head>
 <body>
 {% block content %}
+    {% for error in form.password2.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for error in form.password1.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for error in form.username.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for error in form.email.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
     <h2 style="text-align: justify; color: blue; margin-left: 500px">Създаване на акаунт</h2>
     <br>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="notification is-danger" style="margin-left: 500px">
-                {{ messages[0] }}
-            </div>
-        {% endif %}
-    {% endwith %}
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <div>
+{#            {{ form.first_name.label(class="form-label", style="margin-left: 500px") }}#}
             {{ form.first_name(placeholder="Име",
                               style='width: 25%;
                               font-weight: normal;
@@ -28,8 +52,7 @@
                               border: 1px solid #ccc;
                               border-radius: 4px;
                               box-sizing: border-box') }}
-
-
+{#            {{ form.last_name.label(class="form-label", style="margin-left: 975px") }}#}
             {{ form.last_name(placeholder="Фамилия",
                               style='width: 25%;
                               font-weight: normal;
@@ -39,9 +62,49 @@
                               border-radius: 4px;
                               box-sizing: border-box') }}
         </div>
-    <br>
-            <div>
-                {{ form.username(placeholder="Потребителско име",
+        <br>
+        <div>
+            {{ form.username.label(class="form-label", style="margin-left: 500px") }}
+            {{ form.username(placeholder="Потребителско име",
+                          style='width: 50%;
+                          font-weight: normal;
+                          padding: 12px 20px ;
+                          margin: 8px 0;
+                          margin-left: 500px;
+                          border: 1px solid #ccc;
+                          border-radius: 4px;
+                          box-sizing: border-box') }}
+        </div>
+        <br>
+        <div>
+            {{ form.email.label(class="form-label", style="margin-left: 500px") }}
+            {{ form.email(placeholder="Имейл",
+                          style='width: 50%;
+                          font-weight: normal;
+                          padding: 12px 20px ;
+                          margin: 8px 0;
+                          margin-left: 500px;
+                          border: 1px solid #ccc;
+                          border-radius: 4px;
+                          box-sizing: border-box') }}
+        </div>
+        <br>
+        <div>
+            {{ form.password1.label(class="form-label", style="margin-left: 500px") }}
+            {{ form.password1(placeholder="Парола",
+                          style='width: 50%;
+                          font-weight: normal;
+                          padding: 12px 20px ;
+                          margin: 8px 0;
+                          margin-left: 500px;
+                          border: 1px solid #ccc;
+                          border-radius: 4px;
+                          box-sizing: border-box') }}
+        </div>
+        <br>
+        <div>
+            {{ form.password2.label(class="form-label", style="margin-left: 500px") }}
+            {{ form.password2(placeholder="Потвърди парола",
                               style='width: 50%;
                               font-weight: normal;
                               padding: 12px 20px ;
@@ -50,66 +113,18 @@
                               border: 1px solid #ccc;
                               border-radius: 4px;
                               box-sizing: border-box') }}
-                {% for error in form.username.errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-            <br>
-            <div>
-                {{ form.email(placeholder="Имейл",
-                              style='width: 50%;
-                              font-weight: normal;
-                              padding: 12px 20px ;
-                              margin: 8px 0;
-                              margin-left: 500px;
-                              border: 1px solid #ccc;
-                              border-radius: 4px;
-                              box-sizing: border-box') }}
-                {% for error in form.email.errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-            <br>
-            <div>
-                {{ form.password1(placeholder="Парола",
-                              style='width: 50%;
-                              font-weight: normal;
-                              padding: 12px 20px ;
-                              margin: 8px 0;
-                              margin-left: 500px;
-                              border: 1px solid #ccc;
-                              border-radius: 4px;
-                              box-sizing: border-box') }}
-                {% for error in form.password1.errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-            <br>
-            <div>
-                {{ form.password2(placeholder="Потвърди парола",
-                                  style='width: 50%;
-                                  font-weight: normal;
-                                  padding: 12px 20px ;
-                                  margin: 8px 0;
-                                  margin-left: 500px;
-                                  border: 1px solid #ccc;
-                                  border-radius: 4px;
-                                  box-sizing: border-box') }}
-                {% for error in form.password2.errors %}
-                    <p class="notification is-danger" style="margin-left: 500px">{{ error }}</p>
-                {% endfor %}
-            </div>
-            <br>
-            <div>{{ form.submit(
-                              style ='background-color: blue;
-                              color: white;
-                              width: 10%;
-                              padding: 14px 20px;
-                              margin: 8px 0;
-                              margin-left: 500px;
-                              border: none;
-                              border-radius: 4px') }}
-            </div>
+        </div>
+        <br>
+        <div>{{ form.submit(
+                          style ='background-color: blue;
+                          color: white;
+                          width: 10%;
+                          padding: 14px 20px;
+                          margin: 8px 0;
+                          margin-left: 500px;
+                          border: none;
+                          border-radius: 4px') }}
+        </div>
     </form>
     <p></p>
     <h3 style="color: blue; margin-left:500px;"><a href="{{ url_for('login') }}">Ако вече имаш акаунт</a></h3>

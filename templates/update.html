@@ -9,13 +9,36 @@
 {% block content %}
     <h2 style="text-align: justify; color: blue; margin-left: 500px">Редактиране на акаунт</h2>
     <br>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="notification is-danger">
-                {{ messages[0] }}. Към <a href="{{ url_for('login') }}">ВХОД</a>.
-            </div>
-        {% endif %}
-    {% endwith %}
+    {% for error in form.password2.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for error in form.password1.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for error in form.username.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for error in form.email.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
 
     {% if id == current_user.id %}
 
@@ -23,7 +46,6 @@
         {{ form.hidden_tag() }}
         <div>
             {{ form.first_name.label(class="form-label", style="margin-left: 500px") }}
-
             {{ form.first_name(class="form-control", value=name_to_update.first_name,
               style='width: 25%;
               font-weight: normal;
@@ -33,7 +55,7 @@
               border: 1px solid #ccc;
               border-radius: 4px;
               box-sizing: border-box') }}
-
+            <br>
             {{ form.last_name.label(class="form-label", style="margin-left: 500px") }}
             {{ form.last_name(class="form-control", value=name_to_update.last_name,
               style='width: 25%;
@@ -47,6 +69,7 @@
         </div>
         <br>
         <div>
+            {{ form.username.label(class="form-label", style="margin-left: 500px") }}
             {{ form.username(class="form-control", value=name_to_update.username,
               style='width: 25%;
               font-weight: normal;
@@ -56,12 +79,10 @@
               border: 1px solid #ccc;
               border-radius: 4px;
               box-sizing: border-box') }}
-            {% for error in form.username.errors %}
-                <p>{{ error }}</p>
-            {% endfor %}
         </div>
             <br>
             <div>
+                {{ form.email.label(class="form-label", style="margin-left: 500px") }}
                 {{ form.email(class="form-control", value=name_to_update.email,
                   style='width: 25%;
                   font-weight: normal;
@@ -71,9 +92,6 @@
                   border: 1px solid #ccc;
                   border-radius: 4px;
                   box-sizing: border-box') }}
-                {% for error in form.email.errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
             </div>
             <br>
             <div>{{ form.submit(

@@ -8,14 +8,11 @@
 <body>
 {% block content %}
    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning alert-dismissible fade shadow" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Затвори">
-
-        </button>
-    </div>
+        <div class="alert alert-warning alert-dismissible fade shadow" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Затвори"></button>
+        </div>
     {% endfor %}
-{#    <h2>Потребителски панел</h2>#}
     <div class="card">
       <div class="card-header">
         {{ current_user.first_name }} {{ current_user.last_name }}

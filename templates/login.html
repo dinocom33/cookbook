@@ -2,36 +2,19 @@
 {% block title %}Вход{% endblock %}
 
 {% block content %}
-{#        {% with messages = get_flashed_messages() %}#}
-{#            {% if messages %}#}
-{#                {% for msg in messages %}#}
-{#                    <p>{{ msg }}</p>#}
-{#                {% endfor %}#}
-{#            {% endif %}#}
-{#        {% endwith %}#}
-{#        <div class="header-bar">#}
-{#            <h1>Вход</h1>#}
-{#        </div>#}
-{#        <div class="card-body">#}
-{#            <form method="POST">#}
-{#                <p>Име</p>#}
-{#                <p><label>#}
-{#                    <input type="text" name="nm">#}
-{#                </label></p>#}
-{#                <p>Парола</p>#}
-{#                <p><label>#}
-{#                    <input type="text" pass="nm">#}
-{#                </label></p>#}
-{#                <input class="button" type="submit" value="Вход">#}
-{#            </form>#}
-{#            <p>Ако нямате профил натиснете <a href="/login">Регистрация</a></p>#}
-{#        </div>#}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
 
     <h2 style="color: blue; margin-left: 500px;">Вход в системата</h2>
     <br>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <div>
+            {{ form.username.label(class="form-label", style="margin-left: 500px") }}
             {{ form.username(placeholder="потребителско име",
                                           style='width: 50%;
                                           font-weight: normal;
@@ -47,6 +30,7 @@
         </div>
         <br>
         <div>
+            {{ form.password.label(class="form-label", style="margin-left: 500px") }}
             {{ form.password(placeholder="парола",
                                           style='width: 50%;
                                           font-weight: normal;

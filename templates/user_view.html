@@ -22,6 +22,7 @@
                 <strong>Имейл: </strong>{{ item.email }}<br/>
                 <strong>Дата на регистрация: </strong>{{ item.joined_at }}<br/>
             </p>
+              <a href="{{ url_for("update", id=item.id) }}" class="btn btn-primary btn-sm">Редактиране</a>
           </div>
         </div>
     {% endfor %}
