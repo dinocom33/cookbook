@@ -7,11 +7,23 @@
 </head>
 <body>
 {% block content %}
-    <p>---------------------------------------------------</p>
     {% for item in values %}
-        <p>Име: {{ item.first_name }}  {{ item.last_name }}</p>
-        <p>Имейл: {{ item.email }}</p>
-        <p>---------------------------------------------------</p>
+        <div class="card">
+          <div class="card-header">
+            {{ item.first_name }} {{ item.last_name }}
+          </div>
+          <div class="card-body">
+{#            <h5 class="card-title">Администраторски панел</h5>#}
+            <p class="card-text">
+                <strong>Име: </strong>{{ item.first_name }}<br/>
+                <strong>Фамилия: </strong>{{ item.last_name }}<br/>
+                <strong>Потребителско име: </strong>{{ item.username }}<br/>
+                <strong>Потребителски номер: </strong>{{ item.id }}<br/>
+                <strong>Имейл: </strong>{{ item.email }}<br/>
+                <strong>Дата на регистрация: </strong>{{ item.joined_at }}<br/>
+            </p>
+          </div>
+        </div>
     {% endfor %}
 {% endblock %}
 </body>
